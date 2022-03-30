@@ -1,23 +1,42 @@
-import logo from './logo.svg';
+import React from 'react'
+import Image from './img/login.svg'
+
 import './App.css';
 
 function App() {
+
+  const [comentario, setComentario] = React.useState()
+  const [todosOsComentarios, setTodosOsComentarios] = React.useState([])
+  
+
+
+
+  function digiteiNoTextArea(eventoDoTextArea) {
+    setComentario(eventoDoTextArea.target.value)
+   
+  }
+
+  function cliqueiNoBotao() {
+     const todosOsComentariosAnteriores = [...todosOsComentarios, comentario]
+
+
+
+   setTodosOsComentarios(todosOsComentariosAnteriores)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <img src={Image} alt="imagem-pessoas" />
+      <textarea onChange={digiteiNoTextArea}></textarea>
+      <button onClick={cliqueiNoBotao}>Comentar</button>
+
+      <ul>
+        {todosOsComentarios.map((coment) =>  (
+       <li key={coment}>{coment}</li>
+        ))}
+      
+      </ul>
+
     </div>
   );
 }
